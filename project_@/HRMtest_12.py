@@ -81,6 +81,24 @@ class Successful_Employee_Login():
 
         Comments = driver.find_element(By.XPATH, '//textarea[@class="oxd-textarea oxd-textarea--active oxd-textarea--resize-vertical"]').send_keys("succesfully updated")
         time.sleep(3)
+          
+        button = driver.find_element(By.XPATH, '//span[@class="oxd-switch-input oxd-switch-input--active --label-right"]').click()
+        time.sleep(3)
+
+        account_no = driver.find_element(By.XPATH, '//label[text()="Account Number"]/following::div[1] /*[@class="oxd-input oxd-input--active"]').send_keys("0987654320")
+        time.sleep(3)
+
+        account_type = driver.find_element(By.XPATH, '//label[text()="Account Type"]/following::div[4]').click()
+        time.sleep(3)
+
+        account_type_1 =driver.find_element(By.XPATH, '//div[@role="listbox"]//span[text()="Savings"]').click()
+        time.sleep(3)
+
+        routing_number = driver.find_element(By.XPATH, '//label[text()="Routing Number"]/following::div[1]/*[@class="oxd-input oxd-input--active"]').send_keys('876543')
+        time.sleep(3)
+
+        amount_2 = driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[4]/div[2]/div[2]/div/div[2]/input').send_keys(59000)
+        time.sleep(3)
 
         enter_save = driver.find_element(By.XPATH, '//button[@type="submit"]').click()
         time.sleep(2)
