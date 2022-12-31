@@ -3,7 +3,14 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 import time
-import pytest
+
+"""
+test-11
+     1.login
+     2.job details
+     3.activate employee
+     4.job activated
+"""
 
 @pytest.fixture
 def setUP():
