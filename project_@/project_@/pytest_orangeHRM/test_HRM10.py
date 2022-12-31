@@ -4,6 +4,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 import time
 
+"""
+test-10
+     1.login
+     2.job details
+     3.Terminate Employment
+     4.details
+     5.save
+     
+"""
+
 @pytest.fixture
 def setUP():
             global driver
