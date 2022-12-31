@@ -1,78 +1,60 @@
-import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
+import time
 
 
-"""
-test-10
-     1.login
-     2.job details
-     3.Terminate Employment
-     4.details
-     5.save
-     
-"""
-class Successful_Employee_Login():
-    def login_test(webDriver=None):
-        driver = webdriver.Chrome()
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
-        time.sleep(3)
+s= Service("C:\Webdriver\chromedriver.exe")
+driver = webdriver.Chrome(service=s)
 
-        username = driver.find_element(By.XPATH, '//input[@name="username"]').send_keys("Admin")
-        time.sleep(3)
-
-        password = driver.find_element(By.XPATH, '//input[@name="password"]').send_keys("admin123")
-        time.sleep(3)
-
-        driver.find_element(By.XPATH, '//button[@type="submit"]').click()
-        time.sleep(5)
-
-        enter_pim = driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[2]').click()
-        time.sleep(2)
-
-        emp_list = driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/header/div[2]/nav/ul/li[2]/a').click()
-        time.sleep(3)
-
-        # emp_info = driver.find_element(By.XPATH, '//button[@type="button"][@class="oxd-icon-button"]/*[@class="oxd-icon bi-caret-down-fill"]').send_keys(Keys.ENTER)
-        # time.sleep(3)
-
-        employee_name = driver.find_element(By.XPATH, '//input[@placeholder="Type for hints..."][1]').send_keys("Aaliyah Haq")
-        time.sleep(3)
-
-        save = driver.find_element(By.XPATH, '//button[@type="submit"]').click()
-        time.sleep(7)
-
-        driver = driver.switchTo().Frame(driver.find_element(By.Name, "icontent"))
-        iframeElement = driver.find_element(By.id, "iFrameResult")
-        driver.switchTo().frame(0)
-        driver.switchTo().defaultContent()
-
-        choose = driver.find_element(By.XPATH, '/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div/div/div/div[1]/div[1]/div/div').click()
-        time.sleep(3)
-
-        job = driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div[2]/div[2]/div/div/div/div[1]/div[2]/div[6]/a').click()
-        time.sleep(3)
-
-        terminated = driver.find_element(By.XPATH, '//button[@type="button"][@class="oxd-button oxd-button--medium oxd-button--label-danger --termination-button"]').click()
-        time.sleep(3)
-
-        termination_date = driver.find_element(By.XPATH, '//label[text()="Termination Date"]/following::div[3]').send_keys('2022-11-16')
-        time.sleep(3)
-
-        termination_reason = driver.find_element(By.XPATH, '//label[text()="Termination Reason"]/following::div[3]').click()
-        time.sleep(3)
-
-        termination_reason_1 = driver.find_element(By.XPATH, '//div[@role="listbox"]//span[text()="Contract Not Renewed"]').click()
-        time.sleep(3)
-
-        note = driver.find_element(By.XPATH, '//textarea[@placeholder="Type here"]').send_keys('he have to renew the contract, to continue his job... ')
-
-
-
-
-get_it = Successful_Employee_Login
-get_it.login_test()
+driver.maximize_window()
+driver.implicitly_wait(10)
+driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+time.sleep(3)
+driver.find_element(By.XPATH,"//input[@name='username']").send_keys("Admin")
+time.sleep(3)
+driver.find_element(By.XPATH,"//input[@type='password']").send_keys("admin123")
+time.sleep(3)
+driver.find_element(By.XPATH,"//button[@type='submit']").click()
+time.sleep(3)
+#click PIM Module
+driver.find_element(By.XPATH,"//span[text()='PIM']").click()
+time.sleep(3)
+#Search Employee
+search=driver.find_element(By.XPATH,"(//input[@placeholder='Type for hints...'])[1]")
+time.sleep(3)
+search.send_keys("Cassidy  Hope")
+time.sleep(3)
+ka=driver.find_element(By.XPATH,"//button[@type='submit']")
+ka.click()
+time.sleep(3)
+se=driver.find_element(By.XPATH,"(//i[@class='oxd-icon bi-pencil-fill'])[1]")
+se.click()
+time.sleep(3)
+#Job
+job=driver.find_element(By.XPATH,"//a[contains(text(),'Job')]").click()
+time.sleep(5)
+#Terminate
+ter=driver.find_element(By.CSS_SELECTOR,".oxd-button--label-danger").click()
+time.sleep(3)
+#Date
+da=driver.find_element(By.XPATH,"//div[@class='oxd-sheet oxd-sheet--rounded oxd-sheet--white oxd-dialog-sheet oxd-dialog-sheet--shadow oxd-dialog-sheet--gutters orangehrm-dialog-modal']//input[@class='oxd-input oxd-input--active']")
+da.send_keys("2022-12-30")
+time.sleep(3)
+#Reason
+re=driver.find_element(By.XPATH,"//div[@role='document']//form[@class='oxd-form']//div[@class='oxd-form-row']//div[@class='oxd-input-group oxd-input-field-bottom-space']//div//i[@class='oxd-icon bi-caret-down-fill oxd-select-text--arrow']").click()
+son=driver.find_element(By.XPATH,"//span[text()='Laid-off']").click()
+time.sleep(3)
+#Note
+note=driver.find_element(By.XPATH,"//textarea[@placeholder='Type here']")
+note.send_keys("Due To Lay Off")
+time.sleep(3)
+#Save
+sa=driver.find_element(By.XPATH,"(//button[@type='submit'][normalize-space()='Save'])[2]").click()
+time.sleep(10)
+#Activate
+driver.find_element(By.XPATH,"//button[text()=' Activate Employment '] ").click()
+time.sleep(3)
 
 
 
